@@ -11,6 +11,11 @@ def tagger(sentence):
     #print(taggedText)
     return taggedText
 
+def similarityInAList(sameTaggedList, tag):
+    for i in range(len(sameTaggedList-1)):
+        similarity(sameTaggedList[i], sameTaggedList[i+1])
+
+    return
 
 def sentiScores(word):      #takes input as string, return bith +&- values
     word = swn.senti_synset(word)[0]
@@ -20,9 +25,9 @@ def sentiScores(word):      #takes input as string, return bith +&- values
     return values
 
 
-def similarity(word1, word2):
-	obj1 = wn.synset(word1 + ".n.01")
-	obj2 = wn.synset(word2 + ".n.01")
+def similarity(word1, word2, tag):
+	obj1 = wn.synset(word1 + "."+ tag+".01")
+	obj2 = wn.synset(word2 + "."+ tag+".01")
 	#print(obj1)
 	brown_ic = wordnet_ic.ic('ic-brown.dat') 	# Information content
 	semcor_ic = wordnet_ic.ic('ic-brown.dat')
@@ -47,9 +52,7 @@ for i in range(len(Taggedtext)):
     match = re.match(r'VB*', old)
     if match:
         Taggedtext[i] = (Taggedtext[i][0],'VB')
-
         listV.append(Taggedtext[i][0])
-
         countV += 1
         
 #for noun
@@ -57,7 +60,6 @@ for i in range(len(Taggedtext)):
     if match:
         Taggedtext[i] = (Taggedtext[i][0],'NN')
         countN += 1
-
         listN.append(Taggedtext[i][0])
 
 #for adjectives
@@ -65,7 +67,6 @@ for i in range(len(Taggedtext)):
     if match:
         Taggedtext[i] = (Taggedtext[i][0],'JJ')
         countA += 1
-
         listA.append(Taggedtext[i][0])
 
 
@@ -74,7 +75,6 @@ for i in range(len(Taggedtext)):
     if match:
         Taggedtext[i] = (Taggedtext[i][0],'RB')
         countR += 1
-
         listR.append(Taggedtext[i][0])
 
 
@@ -83,8 +83,12 @@ print(After applying the pos tags,Taggedtext)
 for i in Taggedtext:
     val = similarity('good','a')
     print(val)
-
     listR.append(Taggedtext[i][0])
 
 
-#print(Taggedtext)
+
+#getting the sentiscore for all tagged words
+similarityInAList(listA, 'a')
+similarityInAList(listN, 'n')
+similarityInAList(listR, 'r')
+similarityInAList(listV, 'v')
