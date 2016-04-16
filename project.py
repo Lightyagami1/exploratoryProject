@@ -87,20 +87,17 @@ for i in range(len(Taggedtext)):
     if match:
         Taggedtext[i] = (Taggedtext[i][0],'VB')
         listV.append(Taggedtext[i][0])
-        countV += 1
         
 #for noun
     match = re.match(r'NN*', old)
     if match:
         Taggedtext[i] = (Taggedtext[i][0],'NN')
-        countN += 1
         listN.append(Taggedtext[i][0])
 
 #for adjectives
     match = re.match(r'JJ*', old)
     if match:
         Taggedtext[i] = (Taggedtext[i][0],'JJ')
-        countA += 1
         listA.append(Taggedtext[i][0])
 
 
@@ -108,7 +105,6 @@ for i in range(len(Taggedtext)):
     match = re.match(r'RB*', old)
     if match:
         Taggedtext[i] = (Taggedtext[i][0],'RB')
-        countR += 1
         listR.append(Taggedtext[i][0])
 
 listA = removingCommonWords(listA)
