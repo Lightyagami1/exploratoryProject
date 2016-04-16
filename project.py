@@ -63,7 +63,14 @@ def synsetToString(obj, tag):
     return l
 
 def findingResnikSimilarity(synset1, synset2):
-	return (max (wn.synset(synset1).path_similarity(wn.synset(synset2)), wn.synset(synset2).path_similarity(wn.synset(synset1))))
+    if wn.synset(synset1).path_similarity(wn.synset(synset2)) and wn.synset(synset2).path_similarity(wn.synset(synset1)):
+        return (max (wn.synset(synset1).path_similarity(wn.synset(synset2)), wn.synset(synset2).path_similarity(wn.synset(synset1))))
+    else if wn.synset(synset1).path_similarity(wn.synset(synset2)):
+        return wn.synset(synset1).path_similarity(wn.synset(synset2))
+    else if wn.synset(synset2).path_similarity(wn.synset(synset1)):
+        return wn.synset(synset2).path_similarity(wn.synset(synset1))
+    else:
+        return 0
 
 #input starts from here
 text = input()
